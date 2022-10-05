@@ -1,31 +1,29 @@
 using System.Net.Http;
 using DolbyIO.Rest.Communications.Monitor;
 
-namespace DolbyIO.Rest.Communications
+namespace DolbyIO.Rest.Communications;
+
+public sealed class Comms
 {
-    public sealed class Comms
+    public Authentication Authentication { get; }
+
+    public Conferences Conferences { get; }
+
+    public Monitoring Monitor { get; }
+
+    public Recording Recording { get; }
+
+    public Remix Remix { get; }
+
+    public Streaming Streaming { get; }
+
+    internal Comms(HttpClient httpClient)
     {
-        public Authentication Authentication { get; }
-
-        public Conferences Conferences { get; }
-
-        public Monitoring Monitor { get; }
-
-        public Recording Recording { get; }
-
-        public Remix Remix { get; }
-
-        public Streaming Streaming { get; }
-
-        internal Comms(HttpClient httpClient)
-        {
-            Authentication = new Authentication(httpClient);
-            Conferences = new Conferences(httpClient);
-            Monitor = new Monitoring(httpClient);
-            Recording = new Recording(httpClient);
-            Remix = new Remix(httpClient);
-            Streaming = new Streaming(httpClient);
-        }
+        Authentication = new Authentication(httpClient);
+        Conferences = new Conferences(httpClient);
+        Monitor = new Monitoring(httpClient);
+        Recording = new Recording(httpClient);
+        Remix = new Remix(httpClient);
+        Streaming = new Streaming(httpClient);
     }
 }
-

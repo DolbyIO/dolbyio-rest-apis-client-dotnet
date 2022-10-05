@@ -3,13 +3,13 @@ using DolbyIO.Rest.Models;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 
-namespace DolbyIO.Rest.Tests;
+namespace DolbyIO.Rest.Tests.Communications;
 
-[Collection("SDK")]
+[Collection("Communications")]
 public class AuthenticationTests
 {
     [Fact]
-    public async Task Test_Authentication_GetApiAccessTokenAsync()
+    public async Task Test_Authentication_GetClientAccessTokenAsync()
     {
         var jwtToken = new JwtToken
         {
@@ -24,7 +24,7 @@ public class AuthenticationTests
 
         var messageHandler = new MockHttpMessageHandler();
         messageHandler
-            .Expect("https://api.dolby.io/v1/auth/token")
+            .Expect(Urls.SESSION_BASE_URL + "/v1/oauth2/token")
             .WithHeaders("Authorization", $"Basic {authz}")
             .WithFormData(new Dictionary<string, string>() {
                 { "grant_type", "client_credentials" },
@@ -35,7 +35,7 @@ public class AuthenticationTests
         JwtToken jwt;
         using (DolbyIOClient client = new DolbyIOClient(messageHandler.ToHttpClient()))
         {
-            jwt = await client.Authentication.GetApiAccessTokenAsync(appKey, appSecret, jwtToken.ExpiresIn);
+            jwt = await client.Communications.Authentication.GetClientAccessTokenAsync(appKey, appSecret, jwtToken.ExpiresIn);
         }
 
         Assert.NotEqual(jwtToken, jwt);
