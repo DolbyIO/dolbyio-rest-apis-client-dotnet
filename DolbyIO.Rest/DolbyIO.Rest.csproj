@@ -18,6 +18,7 @@
     <None Remove="Media\" />
     <None Remove="Models\" />
     <None Remove="Media\Models\" />
+    <None Remove="Media\Internal\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -29,5 +30,6 @@
     <Folder Include="Media\" />
     <Folder Include="Models\" />
     <Folder Include="Media\Models\" />
+    <Folder Include="Media\Internal\" />
   </ItemGroup>
 </Project>
