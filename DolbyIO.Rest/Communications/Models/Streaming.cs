@@ -7,6 +7,9 @@ internal sealed class StartRtmpRequest
 {
     [JsonProperty("uri")]
     public string Uri { get; set; }
+
+    [JsonProperty("layoutUrl")]
+    public string LayoutUrl { get; set; }
 }
 
 internal sealed class StartRtsRequest
@@ -16,4 +19,7 @@ internal sealed class StartRtsRequest
 
     [JsonProperty("publishingToken")]
     public string PublishingToken { get; set; }
+
+    [JsonProperty("layoutUrl")]
+    public string LayoutUrl { get; set; }
 }
