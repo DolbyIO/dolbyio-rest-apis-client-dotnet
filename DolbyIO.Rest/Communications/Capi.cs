@@ -3,7 +3,7 @@ using DolbyIO.Rest.Communications.Monitor;
 
 namespace DolbyIO.Rest.Communications;
 
-public sealed class Comms
+public sealed class Capi
 {
     public Authentication Authentication { get; }
 
@@ -17,7 +17,7 @@ public sealed class Comms
 
     public Streaming Streaming { get; }
 
-    internal Comms(HttpClient httpClient)
+    internal Capi(HttpClient httpClient)
     {
         Authentication = new Authentication(httpClient);
         Conferences = new Conferences(httpClient);

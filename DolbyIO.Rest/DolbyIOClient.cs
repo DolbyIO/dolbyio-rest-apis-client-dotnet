@@ -11,7 +11,7 @@ public sealed class DolbyIOClient : IDisposable
 
     public Authentication Authentication { get; }
 
-    public Comms Communications { get; }
+    public Capi Communications { get; }
 
     public Mapi Media { get; }
 
@@ -25,7 +25,7 @@ public sealed class DolbyIOClient : IDisposable
         _httpClient = httpClient;
 
         Authentication = new Authentication(_httpClient);
-        Communications = new Comms(_httpClient);
+        Communications = new Capi(_httpClient);
         Media = new Mapi(_httpClient);
     }
 

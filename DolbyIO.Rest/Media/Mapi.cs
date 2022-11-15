@@ -2,7 +2,7 @@
 
 namespace DolbyIO.Rest.Media;
 
-public class Mapi
+public sealed class Mapi
 {
     public Analyze Analyze { get; }
 
