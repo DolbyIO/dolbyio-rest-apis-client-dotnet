@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Fabien Lavocat</Authors>
+    <Company>Dolby.io</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Title>Dolby.io REST APIs Client for .NET</Title>
+    <Description>
+      .NET wrapper for the dolby.io REST Communications and Media APIs.
+    </Description>
+    <PackageProjectUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</RepositoryUrl>
+    <PublishRelease>true</PublishRelease>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -10,6 +20,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+      <None Include="..\LICENSE" Pack="true" PackagePath=""/>
+  </ItemGroup>
+
   <ItemGroup>
     <None Remove="Newtonsoft.Json" />
     <None Remove="Communications\" />
