@@ -44,7 +44,8 @@ public sealed class Streaming
     /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
     public async Task StartRtmpAsync(JwtToken accessToken, string conferenceId, string rtmpUrl, string layoutUrl = null)
     {
-        var requestObject = new StartRtmpRequest {
+        var requestObject = new StartRtmpRequest
+        {
             Uri = rtmpUrl,
             LayoutUrl = layoutUrl
         };
