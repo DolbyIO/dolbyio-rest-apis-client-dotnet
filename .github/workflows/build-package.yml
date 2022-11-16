@@ -37,6 +37,7 @@ jobs:
       with:
         name: nuget-package
         path: DolbyIO.Rest/bin/Release
-    # - name: Deploy to NuGet 🚀
-    #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-    #   run: dotnet nuget push "*.nupkg" --source DolbyIO.Rest/bin/Release --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+    - name: Deploy to NuGet 🚀
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+      working-directory: DolbyIO.Rest/bin/Release
+      run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
