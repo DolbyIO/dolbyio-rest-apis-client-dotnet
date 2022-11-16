@@ -2,49 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latestmajor</LangVersion>
     <Authors>Fabien Lavocat</Authors>
     <Company>Dolby.io</Company>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Title>Dolby.io REST APIs Client for .NET</Title>
-    <Description>
-      .NET wrapper for the dolby.io REST Communications and Media APIs.
-    </Description>
+    <Description>.NET wrapper for the dolby.io REST Communications and Media APIs.</Description>
+    <Summary>.NET wrapper for the dolby.io REST Communications and Media APIs.</Summary>
+    <PackageId>DolbyIO.Rest</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</RepositoryUrl>
     <PublishRelease>true</PublishRelease>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>latestmajor</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>latestmajor</LangVersion>
-  </PropertyGroup>
-
   <ItemGroup>
-      <None Include="..\LICENSE" Pack="true" PackagePath=""/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Newtonsoft.Json" />
-    <None Remove="Communications\" />
-    <None Remove="Internal\" />
-    <None Remove="Communications\Monitor\" />
-    <None Remove="Media\" />
-    <None Remove="Models\" />
-    <None Remove="Media\Models\" />
-    <None Remove="Media\Internal\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Communications\" />
-    <Folder Include="Internal\" />
-    <Folder Include="Communications\Monitor\" />
-    <Folder Include="Media\" />
-    <Folder Include="Models\" />
-    <Folder Include="Media\Models\" />
-    <Folder Include="Media\Internal\" />
-  </ItemGroup>
+
 </Project>
