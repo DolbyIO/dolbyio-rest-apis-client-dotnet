@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  Version: "0.0.0"
+  Version: "1.0.0"
 
 jobs:
   build-nuget-package:
