@@ -37,10 +37,14 @@ public sealed class Remix
     ///     </item>
     /// </list>
     /// </param>
+    /// <param name="layoutName">Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.</param>
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="RemixStatus" /> object.</returns>
-    public async Task<RemixStatus> StartAsync(JwtToken accessToken, string conferenceId, string layoutUrl = null)
+    public async Task<RemixStatus> StartAsync(JwtToken accessToken, string conferenceId, string layoutUrl = null, string layoutName = null)
     {
-        var body = new { layoutUrl = layoutUrl };
+        var body = new {
+            layoutUrl = layoutUrl,
+            layoutName = layoutName
+        };
         string url = $"{Urls.CAPI_BASE_URL}/v2/conferences/mix/{conferenceId}/remix/start";
         return await _httpClient.SendPostAsync<dynamic, RemixStatus>(url, accessToken, body);
     }
