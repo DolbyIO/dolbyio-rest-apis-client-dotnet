@@ -10,6 +10,9 @@ internal sealed class StartRtmpRequest
 
     [JsonProperty("layoutUrl")]
     public string LayoutUrl { get; set; }
+
+    [JsonProperty("layoutName")]
+    public string LayoutName { get; set; }
 }
 
 internal sealed class StartRtsRequest
@@ -22,4 +25,7 @@ internal sealed class StartRtsRequest
 
     [JsonProperty("layoutUrl")]
     public string LayoutUrl { get; set; }
+
+    [JsonProperty("layoutName")]
+    public string LayoutName { get; set; }
 }
