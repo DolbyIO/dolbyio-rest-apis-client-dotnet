@@ -1,6 +1,11 @@
+[![Build NuGet Package](https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet/actions/workflows/build-package.yml/badge.svg)](https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet/actions/workflows/build-package.yml)
+![.NET](https://img.shields.io/badge/dynamic/xml?label=.NET&query=%2F%2FTargetFramework%5B1%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2FDolbyIO%2Fdolbyio-rest-apis-client-dotnet%2Fmain%2FDolbyIO.Rest%2FDolbyIO.Rest.csproj)
+![Nuget](https://img.shields.io/nuget/v/DolbyIO.Rest)
+![License](https://img.shields.io/github/license/DolbyIO/comms-sdk-dotnet)
+
 # Dolby.io REST APIs Client for .NET
 
-.NET wrapper for the dolby.io REST Communications and Media APIs.
+.NET wrapper for the dolby.io REST Communications, Streaming and Media APIs.
 
 ## Install this SDK
 

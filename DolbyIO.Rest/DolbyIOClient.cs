@@ -2,6 +2,7 @@
 using System.Net.Http;
 using DolbyIO.Rest.Communications;
 using DolbyIO.Rest.Media;
+using DolbyIO.Rest.Streaming;
 
 namespace DolbyIO.Rest;
 
@@ -15,6 +16,8 @@ public sealed class DolbyIOClient : IDisposable
 
     public Mapi Media { get; }
 
+    public Sapi Streaming { get; }
+
     public DolbyIOClient()
         : this(new HttpClient())
     {
@@ -27,6 +30,7 @@ public sealed class DolbyIOClient : IDisposable
         Authentication = new Authentication(_httpClient);
         Communications = new Capi(_httpClient);
         Media = new Mapi(_httpClient);
+        Streaming = new Sapi(_httpClient);
     }
 
     ~DolbyIOClient()
