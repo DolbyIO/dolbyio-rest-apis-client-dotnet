@@ -1,0 +1,43 @@
+name: Build NuGet Package
+
+on:
+  push:
+
+env:
+  VERSION: "0.1.0"
+
+jobs:
+  build-nuget-package:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.x'
+    - name: Set package version
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+      run: echo "::set-env name=VERSION::$(($env:GITHUB_REF -split '/')[-1] -replace ' ','')"
+    - name: Build the solution 🔨
+      run: dotnet build -p:Version=$VERSION
+    - name: Run Unit Tests 🍴
+      run: dotnet test
+    - name: Create NuGet package 🌎
+      run: dotnet pack DolbyIO.Rest/DolbyIO.Rest.csproj -p:Configuration=Release -p:Version=$VERSION
+    - name: Sign NuGet Package
+      working-directory: DolbyIO.Rest/bin/Release
+      run: |
+        echo "${{ secrets.WINDOWS_CERTIFICATE }}" | base64 --decode > certificate.pfx
+        dotnet nuget sign DolbyIO.Rest.*.nupkg --certificate-path ./certificate.pfx --certificate-password ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD}} --timestamper http://timestamp.digicert.com/
+        rm certificate.pfx
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: nuget-package
+        path: DolbyIO.Rest/bin/Release
+    - name: Deploy to NuGet 🚀
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+      working-directory: DolbyIO.Rest/bin/Release
+      run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}

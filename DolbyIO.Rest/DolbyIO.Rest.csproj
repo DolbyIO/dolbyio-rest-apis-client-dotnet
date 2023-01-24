@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latestmajor</LangVersion>
+    <Authors>Fabien Lavocat</Authors>
+    <Company>Dolby.io</Company>
+    <Title>Dolby.io REST APIs Client for .NET</Title>
+    <Description>.NET wrapper for the dolby.io REST Communications and Media APIs.</Description>
+    <Summary>.NET wrapper for the dolby.io REST Communications and Media APIs.</Summary>
+    <PackageId>DolbyIO.Rest</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DolbyIO/dolbyio-rest-apis-client-dotnet</RepositoryUrl>
+    <PublishRelease>true</PublishRelease>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+</Project>
