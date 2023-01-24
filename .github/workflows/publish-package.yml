@@ -1,9 +1,11 @@
 name: Build NuGet Package
 
 on:
-  push:
-    branches:
-    - '**'
+  release:
+    types: [ published ]
+
+env:
+  VERSION: ${{ github.event.release.tag_name }}
 
 jobs:
   build-nuget-package:
@@ -17,11 +19,11 @@ jobs:
       with:
         dotnet-version: '6.x'
     - name: Build the solution 🔨
-      run: dotnet build
+      run: dotnet build -p:Version=${{ env.VERSION }}
     - name: Run Unit Tests 🍴
       run: dotnet test
     - name: Create NuGet package 🌎
-      run: dotnet pack DolbyIO.Rest/DolbyIO.Rest.csproj -p:Configuration=Release
+      run: dotnet pack DolbyIO.Rest/DolbyIO.Rest.csproj -p:Configuration=Release -p:Version=${{ env.VERSION }}
     - name: Sign NuGet Package
       working-directory: DolbyIO.Rest/bin/Release
       run: |
@@ -33,3 +35,6 @@ jobs:
       with:
         name: nuget-package
         path: DolbyIO.Rest/bin/Release
+    - name: Deploy to NuGet 🚀
+      working-directory: DolbyIO.Rest/bin/Release
+      run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
