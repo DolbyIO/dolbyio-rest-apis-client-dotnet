@@ -41,13 +41,15 @@ public sealed class Streaming
     ///     </item>
     /// </list>
     /// </param>
+    /// <param name="layoutName">Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.</param>
     /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-    public async Task StartRtmpAsync(JwtToken accessToken, string conferenceId, string rtmpUrl, string layoutUrl = null)
+    public async Task StartRtmpAsync(JwtToken accessToken, string conferenceId, string rtmpUrl, string layoutUrl = null, string layoutName = null)
     {
         var requestObject = new StartRtmpRequest
         {
             Uri = rtmpUrl,
-            LayoutUrl = layoutUrl
+            LayoutUrl = layoutUrl,
+            LayoutName = layoutName
         };
 
         string url = $"{Urls.CAPI_BASE_URL}/v2/conferences/mix/{conferenceId}/rtmp/start";
@@ -92,14 +94,16 @@ public sealed class Streaming
     ///     </item>
     /// </list>
     /// </param>
+    /// <param name="layoutName">Defines a name for the given layout URL, which makes layout identification easier for customers especially when the layout URL is not explicit.</param>
     /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-    public async Task StartRtsAsync(JwtToken accessToken, string conferenceId, string streamName, string publishingToken, string layoutUrl = null)
+    public async Task StartRtsAsync(JwtToken accessToken, string conferenceId, string streamName, string publishingToken, string layoutUrl = null, string layoutName = null)
     {
         var requestObject = new StartRtsRequest
         {
             StreamName = streamName,
             PublishingToken = publishingToken,
-            LayoutUrl = layoutUrl
+            LayoutUrl = layoutUrl,
+            LayoutName = layoutName
         };
 
         string url = $"{Urls.CAPI_BASE_URL}/v2/conferences/mix/{conferenceId}/rts/start";
