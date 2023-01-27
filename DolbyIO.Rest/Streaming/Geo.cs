@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Streaming.Models;
 using Newtonsoft.Json;
@@ -9,6 +8,8 @@ namespace DolbyIO.Rest.Streaming;
 
 public sealed class Geo
 {
+    private const string URL_BASE = Urls.SAPI_BASE_URL + "/api/geo/account";
+
     private readonly HttpClient _httpClient;
 
     internal Geo(HttpClient httpClient)
@@ -18,20 +19,12 @@ public sealed class Geo
 
     public async Task<GeoResponse> ReadAsync(string apiSecret)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/geo/account";
-
-        using var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiSecret);
-        request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
-        request.Headers.TryAddWithoutValidation("Accept", "application/json");
-
+        using HttpRequestMessage request = Extensions.BuildHttpRequestMessageBase(HttpMethod.Get, URL_BASE, apiSecret);
         return await _httpClient.GetResponseAsync<GeoResponse>(request);
     }
 
     public async Task<ClusterResponse> UpdateAsync(string apiSecret, IEnumerable<string> allowedCountries, IEnumerable<string> deniedCountries)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/cluster";
-
         var body = new
         {
             updateAllowedCountries = allowedCountries,
@@ -39,7 +32,7 @@ public sealed class Geo
         };
 
         string content = JsonConvert.SerializeObject(body);
-        using HttpRequestMessage request = Extensions.BuildHttpRequestMessage(HttpMethod.Post, url, apiSecret, content);
+        using HttpRequestMessage request = Extensions.BuildHttpRequestMessage(HttpMethod.Post, URL_BASE, apiSecret, content);
         return await _httpClient.GetResponseAsync<ClusterResponse>(request);
     }
 }

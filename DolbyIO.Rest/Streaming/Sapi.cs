@@ -10,6 +10,8 @@ public sealed class Sapi
 
     public PublishToken PublishToken { get; }
 
+    public Stream Stream { get; }
+
     public Director Director { get; }
 
     public Whip Whip { get; }
@@ -21,6 +23,7 @@ public sealed class Sapi
         Cluster = new Cluster(httpClient);
         Geo = new Geo(httpClient);
         PublishToken = new PublishToken(httpClient);
+        Stream = new Stream(httpClient);
 
         Director = new Director(httpClient);
         Whip = new Whip(httpClient);
