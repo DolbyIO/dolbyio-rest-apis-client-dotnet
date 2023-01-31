@@ -80,7 +80,7 @@ Conference conference = await client.Conferences.CreateAsync(jwt, options);
 
 ## Real-time Streaming Examples
 
-### Get a publish token
+### Get the authorization token to publish a stream
 
 ```csharp
 using System;
@@ -88,16 +88,16 @@ using DolbyIO.Rest;
 using DolbyIO.Rest.Models;
 using Newtonsoft.Json;
 
-const string API_SECRET = "api_secret";
+const string PUBLISHING_TOKEN = "publishing_token";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-PublishResponse response = await client.Streaming.Director.PublishAsync(API_SECRET, "stream_name");
+PublishResponse response = await client.Streaming.Director.PublishAsync(PUBLISHING_TOKEN, "stream_name");
 
 Console.WriteLine($"Token: {response.Data.Jwt}");
 ```
 
-### Get a subscribe token
+### Get the authorization token to subscribe to a stream
 
 ```csharp
 using System;
@@ -105,11 +105,11 @@ using DolbyIO.Rest;
 using DolbyIO.Rest.Models;
 using Newtonsoft.Json;
 
-const string API_SECRET = "api_secret";
+const string PUBLISHING_TOKEN = "publishing_token";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-SubscribeResponse response = await client.Streaming.Director.SubscribeAsync(API_SECRET, "stream_name", "stream_account_id");
+SubscribeResponse response = await client.Streaming.Director.SubscribeAsync(PUBLISHING_TOKEN, "stream_name", "stream_account_id");
 
 Console.WriteLine($"Token: {response.Data.Jwt}");
 ```

@@ -13,12 +13,12 @@ internal static class Extensions
     public static HttpRequestMessage BuildHttpRequestMessageBase(
         HttpMethod httpMethod,
         string url,
-        string apiSecret,
+        string bearerToken,
         string accept = "application/json")
     {
         var request = new HttpRequestMessage(httpMethod, url);
 
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiSecret);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
         request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
         return request;
@@ -27,12 +27,12 @@ internal static class Extensions
     public static HttpRequestMessage BuildHttpRequestMessage(
         HttpMethod httpMethod,
         string url,
-        string apiSecret,
+        string bearerToken,
         string content,
         string contentType = "application/json",
         string accept = "application/json")
     {
-        HttpRequestMessage request = BuildHttpRequestMessageBase(httpMethod, url, apiSecret, accept);
+        HttpRequestMessage request = BuildHttpRequestMessageBase(httpMethod, url, bearerToken, accept);
 
         request.Content = new StringContent(content, Encoding.UTF8, contentType);
 
