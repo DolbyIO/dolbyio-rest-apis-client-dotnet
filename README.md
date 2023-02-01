@@ -80,38 +80,52 @@ Conference conference = await client.Conferences.CreateAsync(jwt, options);
 
 ## Real-time Streaming Examples
 
-### Get the authorization token to publish a stream
+### Create a publish token
 
 ```csharp
 using System;
 using DolbyIO.Rest;
-using DolbyIO.Rest.Models;
+using DolbyIO.Rest.Streaming.Models;
 using Newtonsoft.Json;
-
-const string PUBLISHING_TOKEN = "publishing_token";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-PublishResponse response = await client.Streaming.Director.PublishAsync(PUBLISHING_TOKEN, "stream_name");
-
-Console.WriteLine($"Token: {response.Data.Jwt}");
+CreatePublishToken create = new CreatePublishToken
+{
+    Label = "My token",
+    Streams = new List<PublishTokenStream>
+    {
+        new PublishTokenStream
+        {
+            StreamName = "feedA"
+        }
+    }
+};
+PublishToken token = await client.Streaming.PublishToken.CreateAsync("api_secret", create);
 ```
 
-### Get the authorization token to subscribe to a stream
+### Create a subscribe token
 
 ```csharp
 using System;
 using DolbyIO.Rest;
-using DolbyIO.Rest.Models;
+using DolbyIO.Rest.Streaming.Models;
 using Newtonsoft.Json;
-
-const string PUBLISHING_TOKEN = "publishing_token";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-SubscribeResponse response = await client.Streaming.Director.SubscribeAsync(PUBLISHING_TOKEN, "stream_name", "stream_account_id");
-
-Console.WriteLine($"Token: {response.Data.Jwt}");
+CreateSubscribeToken create = new CreateSubscribeToken
+{
+    Label = "My token",
+    Streams = new List<SubscribeTokenStream>
+    {
+        new SubscribeTokenStream
+        {
+            StreamName = "feedA"
+        }
+    }
+};
+SubscribeToken token = await client.Streaming.SubscribeToken.CreateAsync("api_secret", create);
 ```
 
 ## Media Examples

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace DolbyIO.Rest.Streaming.Models;
 
-public sealed class AvailableCluster
+public sealed class ClusterDescription
 {
     [JsonProperty("id")]
     public string Id { get; internal set; }
@@ -15,15 +15,11 @@ public sealed class AvailableCluster
     public string Rtmp { get; internal set; }
 }
 
-public sealed class ClusterData
+public sealed class ClusterResponse
 {
     [JsonProperty("defaultCluster")]
     public string DefaultCluster { get; internal set; }
 
     [JsonProperty("availableClusters")]
-    public IEnumerable<AvailableCluster> AvailableClusters { get; internal set; }
-}
-
-public sealed class ClusterResponse : BaseResponse<ClusterData>
-{
+    public IEnumerable<ClusterDescription> AvailableClusters { get; internal set; }
 }

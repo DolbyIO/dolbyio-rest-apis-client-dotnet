@@ -37,11 +37,11 @@ public sealed class Director
     /// <summary>
     /// Requests for url and authorization to subscribe to a stream.
     /// </summary>
-    /// <param name="publishingToken">The publishing token.</param>
     /// <param name="streamName">The name of the stream.</param>
     /// <param name="streamAccountId">The account identifier. Required only for published streams which have subscribeRequiresAuth=false.</param>
+    /// <param name="subscribeToken">The subscribe token.</param>
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="SubscribeResponse" /> object.</returns>
-    public async Task<SubscribeResponse> SubscribeAsync(string publishingToken, string streamName, string streamAccountId)
+    public async Task<SubscribeResponse> SubscribeAsync(string streamName, string streamAccountId = null, string subscribeToken = null)
     {
         const string url = Urls.SAPI_DIRECTOR_BASE_URL + "/api/director/subscribe";
 
@@ -52,7 +52,7 @@ public sealed class Director
         };
 
         string content = JsonConvert.SerializeObject(body);
-        using HttpRequestMessage request = Extensions.BuildHttpRequestMessage(HttpMethod.Post, url, publishingToken, content);
+        using HttpRequestMessage request = Extensions.BuildHttpRequestMessage(HttpMethod.Post, url, subscribeToken, content);
         return await _httpClient.GetResponseAsync<SubscribeResponse>(request);
     }
 }

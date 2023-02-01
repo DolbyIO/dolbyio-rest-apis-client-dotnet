@@ -25,7 +25,7 @@ public sealed class FileLocationAuth
     /// <param name="key">The AWS client access key.</param>
     /// <param name="secret">The AWS client secret.</param>
     /// <param name="token">The AWS client token.</param>
-    public FileLocationAuth(string key, string secret, string? token = null)
+    public FileLocationAuth(string key, string secret, string token = null)
     {
         Key = key;
         Secret = secret;

@@ -17,8 +17,9 @@ internal static class Extensions
         string accept = "application/json")
     {
         var request = new HttpRequestMessage(httpMethod, url);
-
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+        request.Headers.Authorization = string.IsNullOrWhiteSpace(bearerToken)
+            ? new AuthenticationHeaderValue("NoAuth")
+            : new AuthenticationHeaderValue("Bearer", bearerToken);
         request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
         return request;
@@ -55,9 +56,8 @@ internal static class Extensions
     }
 
     public static async Task<TResult> GetResponseAsync<TResult>(this HttpClient httpClient, HttpRequestMessage httpRequestMessage)
-        where TResult : class
     {
         string json = await SendRequestAsync(httpClient, httpRequestMessage);
-        return JsonConvert.DeserializeObject<TResult>(json);
+        return JsonConvert.DeserializeObject<BaseResponse<TResult>>(json).Data;
     }
 }

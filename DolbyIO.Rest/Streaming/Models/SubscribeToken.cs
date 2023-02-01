@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace DolbyIO.Rest.Streaming.Models;
 
-public sealed class PublishTokenStream
+public sealed class SubscribeTokenStream
 {
     [JsonProperty("streamName")]
     public string StreamName { get; set; }
@@ -13,7 +13,7 @@ public sealed class PublishTokenStream
     public bool IsRegex { get; set; }
 }
 
-public sealed class PublishToken
+public sealed class SubscribeToken
 {
     [JsonProperty("id")]
     public int Id { get; internal set; }
@@ -34,7 +34,7 @@ public sealed class PublishToken
     public bool IsActive { get; internal set; }
 
     [JsonProperty("streams")]
-    public IEnumerable<PublishTokenStream> Streams { get; internal set; }
+    public IEnumerable<SubscribeTokenStream> Streams { get; internal set; }
 
     [JsonProperty("allowedOrigins")]
     public IEnumerable<string> AllowedOrigins { get; internal set; }
@@ -53,18 +53,9 @@ public sealed class PublishToken
 
     [JsonProperty("originCluster")]
     public string OriginCluster { get; internal set; }
-
-    [JsonProperty("subscribeRequiresAuth")]
-    public bool SubscribeRequiresAuth { get; internal set; }
-
-    [JsonProperty("record")]
-    public bool Record { get; internal set; }
-
-    [JsonProperty("multisource")]
-    public bool Multisource { get; internal set; }
 }
 
-public sealed class UpdatePublishTokenData
+public sealed class UpdateSubscribeToken
 {
     [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
     public string Label { get; set; }
@@ -76,7 +67,7 @@ public sealed class UpdatePublishTokenData
     public bool? IsActive { get; set; }
 
     [JsonProperty("addTokenStreams", NullValueHandling = NullValueHandling.Ignore)]
-    public IEnumerable<PublishTokenStream> AddTokenStreams { get; set; }
+    public IEnumerable<SubscribeTokenStream> AddTokenStreams { get; set; }
 
     [JsonProperty("removeTokenStreams", NullValueHandling = NullValueHandling.Ignore)]
     public IEnumerable<string> RemoveTokenStreams { get; set; }
@@ -98,18 +89,9 @@ public sealed class UpdatePublishTokenData
 
     [JsonProperty("updateOriginCluster", NullValueHandling = NullValueHandling.Ignore)]
     public string UpdateOriginCluster { get; set; }
-
-    [JsonProperty("subscribeRequiresAuth", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? SubscribeRequiresAuth { get; set; }
-
-    [JsonProperty("record", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? Record { get; set; }
-
-    [JsonProperty("multisource", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? Multisource { get; set; }
 }
 
-public sealed class CreatePublishToken
+public sealed class CreateSubscribeToken
 {
     [JsonProperty("label")]
     public string Label { get; set; }
@@ -137,37 +119,4 @@ public sealed class CreatePublishToken
 
     [JsonProperty("originCluster", NullValueHandling = NullValueHandling.Ignore)]
     public string OriginCluster { get; set; }
-
-    [JsonProperty("subscribeRequiresAuth", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? SubscribeRequiresAuth { get; set; }
-
-    [JsonProperty("record", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? Record { get; set; }
-
-    [JsonProperty("multisource", NullValueHandling = NullValueHandling.Ignore)]
-    public bool? Multisource { get; set; }
-}
-
-public sealed class ActivePublishToken
-{
-    [JsonProperty("tokenIds")]
-    public int[] TokenIds { get; internal set; }
-}
-
-public sealed class FailedToken
-{
-    [JsonProperty("tokenId")]
-    public int TokenId { get; internal set; }
-
-    [JsonProperty("errorMessage")]
-    public string ErrorMessage { get; internal set; }
-}
-
-public sealed class DisablePublishTokenResponse
-{
-    [JsonProperty("successfulTokens")]
-    public int[] SuccessfulTokens { get; internal set; }
-
-    [JsonProperty("failedTokens")]
-    public FailedToken[] FailedTokens { get; internal set; }
 }

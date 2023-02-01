@@ -15,7 +15,7 @@ public sealed class IceServer
     public string Credential { get; internal set; }
 }
 
-public class SubscribeDataResponse
+public class SubscribeResponse
 {
     [JsonProperty("urls")]
     public IEnumerable<string> Urls { get; internal set; }
@@ -30,16 +30,8 @@ public class SubscribeDataResponse
     public string StreamAccountId { get; internal set; }
 }
 
-public sealed class PublishDataResponse : SubscribeDataResponse
+public sealed class PublishResponse : SubscribeResponse
 {
     [JsonProperty("subscribeRequiresAuth")]
     public bool SubscribeRequiresAuth { get; internal set; }
-}
-
-public sealed class PublishResponse : BaseResponse<PublishDataResponse>
-{
-}
-
-public sealed class SubscribeResponse : BaseResponse<SubscribeDataResponse>
-{
 }
