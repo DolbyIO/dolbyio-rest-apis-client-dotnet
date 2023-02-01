@@ -23,16 +23,16 @@ public sealed class Geo
         return await _httpClient.GetResponseAsync<GeoResponse>(request);
     }
 
-    public async Task<ClusterResponse> UpdateAsync(string apiSecret, IEnumerable<string> allowedCountries, IEnumerable<string> deniedCountries)
+    public async Task<GeoResponse> UpdateAsync(string apiSecret, IEnumerable<string> allowedCountries, IEnumerable<string> deniedCountries)
     {
-        var body = new
+        var body = new GeoUpdate
         {
-            updateAllowedCountries = allowedCountries,
-            updateDeniedCountries = deniedCountries
+            UpdateAllowedCountries = allowedCountries,
+            UpdateDeniedCountries = deniedCountries
         };
 
         string content = JsonConvert.SerializeObject(body);
         using HttpRequestMessage request = Extensions.BuildHttpRequestMessage(HttpMethod.Post, URL_BASE, apiSecret, content);
-        return await _httpClient.GetResponseAsync<ClusterResponse>(request);
+        return await _httpClient.GetResponseAsync<GeoResponse>(request);
     }
 }

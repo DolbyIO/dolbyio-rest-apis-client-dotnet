@@ -1,4 +1,5 @@
 using System.Net.Http;
+using DolbyIO.Rest.Streaming.Models;
 
 namespace DolbyIO.Rest.Streaming;
 
@@ -8,9 +9,11 @@ public sealed class Sapi
 
     public Geo Geo { get; }
 
-    public PublishToken PublishToken { get; }
+    public PublishTokens PublishToken { get; }
 
     public Stream Stream { get; }
+
+    public SubscribeTokens SubscribeToken { get; }
 
     public Director Director { get; }
 
@@ -22,8 +25,9 @@ public sealed class Sapi
     {
         Cluster = new Cluster(httpClient);
         Geo = new Geo(httpClient);
-        PublishToken = new PublishToken(httpClient);
+        PublishToken = new PublishTokens(httpClient);
         Stream = new Stream(httpClient);
+        SubscribeToken = new SubscribeTokens(httpClient);
 
         Director = new Director(httpClient);
         Whip = new Whip(httpClient);

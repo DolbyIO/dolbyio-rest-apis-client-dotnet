@@ -8,7 +8,7 @@ env:
   VERSION: ${{ github.event.release.tag_name }}
 
 jobs:
-  build-nuget-package:
+  publish-nuget-package:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️

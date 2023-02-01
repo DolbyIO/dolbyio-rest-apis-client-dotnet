@@ -13,12 +13,13 @@ internal static class Extensions
     public static HttpRequestMessage BuildHttpRequestMessageBase(
         HttpMethod httpMethod,
         string url,
-        string apiSecret,
+        string bearerToken,
         string accept = "application/json")
     {
         var request = new HttpRequestMessage(httpMethod, url);
-
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiSecret);
+        request.Headers.Authorization = string.IsNullOrWhiteSpace(bearerToken)
+            ? new AuthenticationHeaderValue("NoAuth")
+            : new AuthenticationHeaderValue("Bearer", bearerToken);
         request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
         return request;
@@ -27,12 +28,12 @@ internal static class Extensions
     public static HttpRequestMessage BuildHttpRequestMessage(
         HttpMethod httpMethod,
         string url,
-        string apiSecret,
+        string bearerToken,
         string content,
         string contentType = "application/json",
         string accept = "application/json")
     {
-        HttpRequestMessage request = BuildHttpRequestMessageBase(httpMethod, url, apiSecret, accept);
+        HttpRequestMessage request = BuildHttpRequestMessageBase(httpMethod, url, bearerToken, accept);
 
         request.Content = new StringContent(content, Encoding.UTF8, contentType);
 
@@ -55,9 +56,8 @@ internal static class Extensions
     }
 
     public static async Task<TResult> GetResponseAsync<TResult>(this HttpClient httpClient, HttpRequestMessage httpRequestMessage)
-        where TResult : class
     {
         string json = await SendRequestAsync(httpClient, httpRequestMessage);
-        return JsonConvert.DeserializeObject<TResult>(json);
+        return JsonConvert.DeserializeObject<BaseResponse<TResult>>(json).Data;
     }
 }
