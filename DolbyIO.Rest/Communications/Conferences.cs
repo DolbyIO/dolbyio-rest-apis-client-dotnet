@@ -49,6 +49,9 @@ public sealed class Conferences
         };
 
         string url = $"{Urls.CAPI_BASE_URL}/v2/conferences/create";
+        if (!string.IsNullOrWhiteSpace(options.Region))
+            url = url.Replace("https://", $"https://{options.Region}.");
+
         return await _httpClient.SendPostAsync<CreateConferenceRequest, Conference>(url, accessToken, requestObject);
     }
 
