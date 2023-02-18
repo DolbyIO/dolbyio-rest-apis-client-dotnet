@@ -59,6 +59,33 @@ public sealed class CreateConferenceOptions
     /// Gets or sets the recording format. Valid values are <c>mp3</c> and <c>mp4</c>.
     /// </summary>
     public IEnumerable<string> RecordingFormats { get; set; }
+
+    /// <summary>
+    /// Gets or sets the conference region. Can be one of:
+    /// <list type="bullet">
+    ///     <item>
+    ///         <term>au</term>
+    ///         <description>Australia</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>ca</term>
+    ///         <description>Canada</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>eu</term>
+    ///         <description>Europe</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>in</term>
+    ///         <description>India</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>us</term>
+    ///         <description>United States</description>
+    ///     </item>
+    /// </list>
+    /// </summary>
+    public string Region { get; set; }
 }
 
 public enum RTCPMode
