@@ -6,6 +6,8 @@ public sealed class Mapi
 {
     public Analyze Analyze { get; }
 
+    public AnalyzeMusic AnalyzeMusic { get; }
+
     public AnalyzeSpeech AnalyzeSpeech { get; }
 
     public Diagnose Diagnose { get; }
@@ -25,6 +27,7 @@ public sealed class Mapi
     internal Mapi(HttpClient httpClient)
     {
         Analyze = new Analyze(httpClient);
+        AnalyzeMusic = new AnalyzeMusic(httpClient);
         AnalyzeSpeech = new AnalyzeSpeech(httpClient);
         Diagnose = new Diagnose(httpClient);
         Enhance = new Enhance(httpClient);

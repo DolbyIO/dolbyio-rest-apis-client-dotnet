@@ -2,12 +2,12 @@
 
 namespace DolbyIO.Rest.Media.Models;
 
-public sealed class DiagnoseJobResult
+public sealed class AnalyzeMusicJobResult
 {
     [JsonProperty("version")]
     public string Version { get; set; }
 }
 
-public sealed class DiagnoseJob : JobResult<DiagnoseJobResult>
+public sealed class AnalyzeMusicJob : JobResult<AnalyzeMusicJobResult>
 {
 }
