@@ -153,6 +153,9 @@ public sealed class ConferenceInfo
 
     [JsonProperty("statistics")]
     public ConferenceStatistics Statistics { get; set; }
+
+    [JsonProperty("streamingAPIUsage")]
+    public ConferenceStreamingAPIUsage StreamingAPIUsage { get; set; }
 }
 
 public sealed class ConferenceOwner
@@ -201,6 +204,27 @@ public sealed class ConferenceStatistics
 
     [JsonProperty("network")]
     public object Network { get; set; }
+}
+
+public sealed class ConferenceStreamingAPIUsage
+{
+    [JsonProperty("bytesIn")]
+    public long? BytesIn { get; set; }
+
+    [JsonProperty("bytesOut")]
+    public long? BytesOut { get; set; }
+
+    [JsonProperty("publishDurationSec")]
+    public int? PublishDurationSec { get; set; }
+
+    [JsonProperty("publishes")]
+    public int? Publishes { get; set; }
+
+    [JsonProperty("viewDurationSec")]
+    public int? ViewDurationSec { get; set; }
+
+    [JsonProperty("views")]
+    public int? Views { get; set; }
 }
 
 public sealed class ListConferencesResponse : PagedResponse
