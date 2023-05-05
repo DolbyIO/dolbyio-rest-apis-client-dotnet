@@ -23,7 +23,7 @@ public sealed class Authentication
     /// </summary>
     /// <param name="appKey">Your Dolby.io App Key.</param>
     /// <param name="appSecret">Your Dolby.io App Secret.</param>
-    /// <param name="expiresIn">Access token expiration time in seconds. The maximum value is 2,592,000, indicating 30 days. If no value is specified, the default is 3,600, indicating one hour.</param>
+    /// <param name="expiresIn">Access token expiration time in seconds. The maximum value is 86,400, indicating 24 hours. If no value is specified, the default is 3,600, indicating one hour.</param>
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the newly created <see cref="JwtToken" />.</returns>
     public async Task<JwtToken> GetClientAccessTokenAsync(string appKey, string appSecret, int expiresIn = 3600)
     {
