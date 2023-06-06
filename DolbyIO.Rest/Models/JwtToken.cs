@@ -21,4 +21,12 @@ public sealed class JwtToken
     /// </summary>
     [JsonProperty("token_type")]
     public string TokenType { get; internal set; }
+
+#nullable enable
+    /// <summary>
+    /// Gets the scope of access token.
+    /// </summary>
+    [JsonProperty("scope")]
+    public string[]? Scope { get; internal set; }
+#nullable disable
 }

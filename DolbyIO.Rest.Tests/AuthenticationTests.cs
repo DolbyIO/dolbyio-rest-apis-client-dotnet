@@ -15,7 +15,11 @@ public class AuthenticationTests
         {
             AccessToken = "abcdef",
             TokenType = "Bearer",
-            ExpiresIn = 123
+            ExpiresIn = 123,
+            Scope = new string[]
+            {
+                "comms:client_access_token:create"
+            }
         };
 
         const string appKey = "app_key";
@@ -35,12 +39,14 @@ public class AuthenticationTests
         JwtToken jwt;
         using (DolbyIOClient client = new DolbyIOClient(messageHandler.ToHttpClient()))
         {
-            jwt = await client.Authentication.GetApiAccessTokenAsync(appKey, appSecret, jwtToken.ExpiresIn);
+            jwt = await client.Authentication.GetApiAccessTokenAsync(appKey, appSecret, jwtToken.ExpiresIn, new string[] { "comms:client_access_token:create" });
         }
 
         Assert.NotEqual(jwtToken, jwt);
         Assert.Equal(jwtToken.AccessToken, jwt.AccessToken);
         Assert.Equal(jwtToken.TokenType, jwt.TokenType);
         Assert.Equal(jwtToken.ExpiresIn, jwt.ExpiresIn);
+        Assert.Equal(jwtToken.Scope.Length, jwt.Scope?.Length);
+        Assert.Equal(jwtToken.Scope[0], jwt.Scope?[0]);
     }
 }
