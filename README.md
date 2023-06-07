@@ -26,11 +26,27 @@ using DolbyIO.Rest;
 const string APP_KEY = "app_key";
 const string APP_SECRET = "app_secret";
 
-JwtToken jwt;
-using (DolbyIOClient client = new DolbyIOClient())
-{
-    jwt = await client.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
-}
+using DolbyIOClient client = new DolbyIOClient();
+
+JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
+```
+
+To request a particular scope for this access token:
+
+```csharp
+using DolbyIO.Rest;
+
+const string APP_KEY = "app_key";
+const string APP_SECRET = "app_secret";
+
+using DolbyIOClient client = new DolbyIOClient();
+
+JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(
+    APP_KEY,
+    APP_SECRET,
+    3600,
+    new string[] { "comms:client_access_token:create" }
+);
 ```
 
 ## Communications Examples
@@ -46,11 +62,17 @@ using DolbyIO.Rest.Models;
 const string APP_KEY = "app_key";
 const string APP_SECRET = "app_secret";
 
-JwtToken jwt;
-using (DolbyIOClient client = new DolbyIOClient())
-{
-    jwt = await client.Communications.Authentication.GetClientAccessTokenAsync(APP_KEY, APP_SECRET);
-}
+using DolbyIOClient client = new DolbyIOClient();
+
+JwtToken apiToken = await client.Authentication.GetApiAccessTokenAsync(
+    APP_KEY,
+    APP_SECRET,
+    3600,
+    new string[] { "comms:client_access_token:create" }
+);
+
+JwtToken cat = await client.Communications.Authentication
+    .GetClientAccessTokenV2Async(apiToken, new string[] {"*"});
 ```
 
 ### Create a conference
@@ -67,7 +89,12 @@ const string APP_SECRET = "app_secret";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
+JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(
+    APP_KEY,
+    APP_SECRET,
+    3600,
+    new string[] { "comms:conf:create" }
+);
 
 CreateConferenceOptions options = new CreateConferenceOptions
 {
