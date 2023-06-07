@@ -1,5 +1,4 @@
-﻿using System.Text;
-using DolbyIO.Rest.Models;
+﻿using DolbyIO.Rest.Models;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 
@@ -9,7 +8,7 @@ namespace DolbyIO.Rest.Tests.Communications;
 public class AuthenticationTests
 {
     [Fact]
-    public async Task Test_Authentication_GetClientAccessTokenAsync()
+    public async Task Test_Authentication_GetClientAccessTokenV2Async()
     {
         var jwtToken = new JwtToken
         {
@@ -18,24 +17,21 @@ public class AuthenticationTests
             ExpiresIn = 123
         };
 
-        const string appKey = "app_key";
-        const string appSecret = "app_secret";
-        string authz = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{appKey}:{appSecret}"));
-
         var messageHandler = new MockHttpMessageHandler();
         messageHandler
-            .Expect(Urls.SESSION_BASE_URL + "/v1/oauth2/token")
-            .WithHeaders("Authorization", $"Basic {authz}")
+            .Expect("https://comms.api.dolby.io/v2/client-access-token")
+            .WithHeaders("Authorization", $"Bearer {jwtToken.AccessToken}")
             .WithFormData(new Dictionary<string, string>() {
                 { "grant_type", "client_credentials" },
-                { "expires_in", jwtToken.ExpiresIn.ToString() }
+                { "expires_in", jwtToken.ExpiresIn.ToString() },
+                { "sessionScope", "*" }
             })
             .Respond("application/json", JsonConvert.SerializeObject(jwtToken));
 
         JwtToken jwt;
         using (DolbyIOClient client = new DolbyIOClient(messageHandler.ToHttpClient()))
         {
-            jwt = await client.Communications.Authentication.GetClientAccessTokenAsync(appKey, appSecret, jwtToken.ExpiresIn);
+            jwt = await client.Communications.Authentication.GetClientAccessTokenV2Async(jwtToken, new string[] {"*"}, expiresIn: 123);
         }
 
         Assert.NotEqual(jwtToken, jwt);
