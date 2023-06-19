@@ -286,3 +286,36 @@ public sealed class SpatialListener
     [JsonProperty("direction")]
     public CartesianCoordinates Direction { get; set; }
 }
+
+public sealed class ListConferenceParticipant
+{
+    [JsonProperty("userId")]
+    public string UserId { get; set; }
+
+    [JsonProperty("externalId")]
+    public string ExternalId { get; set; }
+
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("avatarUrl")]
+    public string AvatarUrl { get; set; }
+
+    [JsonProperty("ipAddress")]
+    public string IpAddress { get; set; }
+
+    [JsonProperty("userAgent")]
+    public string UserAgent { get; set; }
+
+    [JsonProperty("lastJoinTimestamp")]
+    public int LastJoinTimestamp { get; set; }
+
+    [JsonProperty("nbSession")]
+    public int NbSession { get; set; }
+}
+
+public sealed class ListParticipantsResponse
+{
+    [JsonProperty("participants")]
+    public IEnumerable<ListConferenceParticipant> Participants { get; set; }
+}
