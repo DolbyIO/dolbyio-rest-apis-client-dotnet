@@ -169,6 +169,19 @@ public sealed class Conferences
     }
 
     /// <summary>
+    /// Returns the current participant list.<br/>
+    /// See: <seealso cref="https://docs.dolby.io/communications-apis/reference/return-participant-list"/>
+    /// </summary>
+    /// <param name="accessToken">Access token to use for authentication.</param>
+    /// <param name="conferenceId">Identifier of the conference.</param>
+    /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the list of participants in the conference.</returns>
+    public async Task<ListParticipantsResponse> ParticipantsAsync(JwtToken accessToken, string conferenceId)
+    {
+        string url = $"{Urls.CAPI_BASE_URL}/v2/conferences/{conferenceId}/participants";
+        return await _httpClient.SendGetAsync<ListParticipantsResponse>(url, accessToken);
+    }
+
+    /// <summary>
     /// Terminates an ongoing conference and removes all remaining participants from the conference.<br/>
     /// See: <seealso cref="https://docs.dolby.io/communications-apis/reference/terminate-conference"/>
     /// </summary>
