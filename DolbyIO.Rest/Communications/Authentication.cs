@@ -86,14 +86,6 @@ public sealed class Authentication
         }
 
         const string url = Urls.CAPI_BASE_URL + "/v2/client-access-token";
-        using (var request = new HttpRequestMessage(HttpMethod.Post, url))
-        {
-            request.Headers.Authorization = new AuthenticationHeaderValue(accessToken.TokenType, accessToken.AccessToken);
-            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
-
-            request.Content = new FormUrlEncodedContent(nvc);
-
-            return await _httpClient.SendAsync<JwtToken>(request);
-        }
+        return await _httpClient.SendPostAsync<dynamic, JwtToken>(url, accessToken, nvc);
     }
 }
