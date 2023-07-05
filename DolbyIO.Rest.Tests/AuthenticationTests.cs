@@ -16,10 +16,7 @@ public class AuthenticationTests
             AccessToken = "abcdef",
             TokenType = "Bearer",
             ExpiresIn = 123,
-            Scope = new string[]
-            {
-                "comms:client_access_token:create"
-            }
+            Scope = "comms:client_access_token:create"
         };
 
         const string appKey = "app_key";
@@ -46,7 +43,6 @@ public class AuthenticationTests
         Assert.Equal(jwtToken.AccessToken, jwt.AccessToken);
         Assert.Equal(jwtToken.TokenType, jwt.TokenType);
         Assert.Equal(jwtToken.ExpiresIn, jwt.ExpiresIn);
-        Assert.Equal(jwtToken.Scope.Length, jwt.Scope?.Length);
-        Assert.Equal(jwtToken.Scope[0], jwt.Scope?[0]);
+        Assert.Equal(jwtToken.Scope, jwt.Scope);
     }
 }
