@@ -26,7 +26,7 @@ public sealed class Whep
     /// <remarks>This specification is based on the https://www.ietf.org/archive/id/draft-murillo-whep-00.html draft and will be updated to upcoming versions as soon as they are available.</remarks>
     public async Task<string> WhepAsync(string publishingToken, string streamAccountId, string streamName, string sourceId, string sdpOffer)
     {
-        var uriBuilder = new UriBuilder(Urls.SAPI_DIRECTOR_BASE_URL)
+        var uriBuilder = new UriBuilder(Urls.STREAMING_DIRECTOR_BASE_URL)
         {
             Path = $"/api/whep/{streamAccountId}/{streamName}"
         };

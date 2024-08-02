@@ -17,7 +17,7 @@ public sealed class Cluster
 
     public async Task<ClusterResponse> ReadAsync(string apiSecret)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/cluster";
+        const string url = Urls.STREAMING_BASE_URL + "/api/cluster";
 
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiSecret);
@@ -29,11 +29,11 @@ public sealed class Cluster
 
     public async Task<ClusterResponse> UpdateAsync(string apiSecret, string defaultCluster)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/cluster";
+        const string url = Urls.STREAMING_BASE_URL + "/api/cluster";
 
         var body = new
         {
-            defaultCluster = defaultCluster
+            defaultCluster
         };
 
         string content = JsonConvert.SerializeObject(body);

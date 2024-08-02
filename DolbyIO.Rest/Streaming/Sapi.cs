@@ -1,13 +1,12 @@
 using System.Net.Http;
-using DolbyIO.Rest.Streaming.Models;
 
 namespace DolbyIO.Rest.Streaming;
 
 public sealed class Sapi
 {
-    public Cluster Cluster { get; }
+    public Account Account { get; }
 
-    public Geo Geo { get; }
+    public Cluster Cluster { get; }
 
     public PublishTokens PublishToken { get; }
 
@@ -23,8 +22,8 @@ public sealed class Sapi
 
     internal Sapi(HttpClient httpClient)
     {
+        Account = new Account(httpClient);
         Cluster = new Cluster(httpClient);
-        Geo = new Geo(httpClient);
         PublishToken = new PublishTokens(httpClient);
         Stream = new Stream(httpClient);
         SubscribeToken = new SubscribeTokens(httpClient);

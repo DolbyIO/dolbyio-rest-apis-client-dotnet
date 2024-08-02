@@ -22,7 +22,7 @@ public sealed class Stream
     /// <remarks>Prior to stopping all streams, you must call the <xref href="DolbyIO.Rest.Streaming.PublishToken.DisableAsync"/> function.</remarks>
     public async Task StopAsync(string apiSecret, string streamId)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/stream/stop";
+        const string url = Urls.STREAMING_BASE_URL + "/api/stream/stop";
 
         var body = new
         {
@@ -42,7 +42,7 @@ public sealed class Stream
     /// <remarks>Prior to stopping all streams, you must call the <xref href="DolbyIO.Rest.Streaming.PublishToken.DisableAsync"/> function.</remarks>
     public async Task StopAllAsync(string apiSecret)
     {
-        const string url = Urls.SAPI_BASE_URL + "/api/stream/stop/all";
+        const string url = Urls.STREAMING_BASE_URL + "/api/stream/stop/all";
         using HttpRequestMessage request = Extensions.BuildHttpRequestMessageBase(HttpMethod.Post, url, apiSecret);
         await _httpClient.SendRequestAsync(request);
     }
