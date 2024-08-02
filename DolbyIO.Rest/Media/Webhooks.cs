@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 
 namespace DolbyIO.Rest.Media;
 
@@ -32,7 +31,7 @@ public sealed class Webhooks
                 headers = headers
             }
         };
-        const string requestUrl = Urls.CAPI_BASE_URL + "/media/webhooks";
+        const string requestUrl = Urls.MAPI_BASE_URL + "/media/webhooks";
         WebhookCreationResult result = await _httpClient.SendPostAsync<dynamic, WebhookCreationResult>(requestUrl, accessToken, body);
         return result.WebhookId;
     }
@@ -54,7 +53,7 @@ public sealed class Webhooks
                 headers = options.Headers
             }
         };
-        const string requestUrl = Urls.CAPI_BASE_URL + "/media/webhooks";
+        const string requestUrl = Urls.MAPI_BASE_URL + "/media/webhooks";
         await _httpClient.SendPutAsync(requestUrl, accessToken, body);
     }
 

@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 
 namespace DolbyIO.Rest.Media;
 

@@ -6,7 +6,7 @@
 
 # Dolby.io REST APIs Client for .NET
 
-.NET wrapper for the dolby.io REST [Communications](https://docs.dolby.io/communications-apis/reference/authentication-api), [Streaming](https://docs.dolby.io/streaming-apis/reference) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
+.NET wrapper for the [Dolby Millicast](https://docs.dolby.io/streaming-apis/reference) and [Media](https://docs.dolby.io/media-processing/reference/media-enhance-overview) APIs.
 
 ## Install this SDK
 
@@ -14,95 +14,6 @@ If you want to use NuGet, use the following command:
 
 ```bash
 dotnet add package DolbyIO.Rest
-```
-
-## Authentication
-
-To get an access token that will be used by your server to perform backend operations like creating a conference, use the following code. This is only for the Communications and Media APIs.
-
-```csharp
-using DolbyIO.Rest;
-
-const string APP_KEY = "app_key";
-const string APP_SECRET = "app_secret";
-
-using DolbyIOClient client = new DolbyIOClient();
-
-JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
-```
-
-To request a particular scope for this access token:
-
-```csharp
-using DolbyIO.Rest;
-
-const string APP_KEY = "app_key";
-const string APP_SECRET = "app_secret";
-
-using DolbyIOClient client = new DolbyIOClient();
-
-JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(
-    APP_KEY,
-    APP_SECRET,
-    3600,
-    new string[] { "comms:client_access_token:create" }
-);
-```
-
-## Communications Examples
-
-### Get a Client Access Token
-
-To get an access token that will be used by the client SDK for an end user to open a session against dolby.io, use the following code:
-
-```csharp
-using DolbyIO.Rest;
-using DolbyIO.Rest.Models;
-
-const string APP_KEY = "app_key";
-const string APP_SECRET = "app_secret";
-
-using DolbyIOClient client = new DolbyIOClient();
-
-JwtToken apiToken = await client.Authentication.GetApiAccessTokenAsync(
-    APP_KEY,
-    APP_SECRET,
-    3600,
-    new string[] { "comms:client_access_token:create" }
-);
-
-JwtToken cat = await client.Communications.Authentication
-    .GetClientAccessTokenV2Async(apiToken, new string[] {"*"});
-```
-
-### Create a conference
-
-To create a Dolby Voice conference, you first must retrieve an API Access Token, then use the following code to create the conference.
-
-```csharp
-using DolbyIO.Rest;
-using DolbyIO.Rest.Communications.Models;
-using DolbyIO.Rest.Models;
-
-const string APP_KEY = "app_key";
-const string APP_SECRET = "app_secret";
-
-using DolbyIOClient client = new DolbyIOClient();
-
-JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(
-    APP_KEY,
-    APP_SECRET,
-    3600,
-    new string[] { "comms:conf:create" }
-);
-
-CreateConferenceOptions options = new CreateConferenceOptions
-{
-    Alias = "Conference Name",
-    OwnerExternalId = "Fabien"
-};
-
-Conference conference = await client.Conferences.CreateAsync(jwt, options);
 ```
 
 ## Real-time Streaming Examples
@@ -114,6 +25,8 @@ using System;
 using DolbyIO.Rest;
 using DolbyIO.Rest.Streaming.Models;
 using Newtonsoft.Json;
+
+const string API_SECRET = "api_secret";
 
 using DolbyIOClient client = new DolbyIOClient();
 
@@ -128,7 +41,7 @@ CreatePublishToken create = new CreatePublishToken
         }
     }
 };
-PublishToken token = await client.Streaming.PublishToken.CreateAsync("api_secret", create);
+PublishToken token = await client.Streaming.PublishToken.CreateAsync(API_SECRET, create);
 ```
 
 ### Create a subscribe token
@@ -138,6 +51,8 @@ using System;
 using DolbyIO.Rest;
 using DolbyIO.Rest.Streaming.Models;
 using Newtonsoft.Json;
+
+const string API_SECRET = "api_secret";
 
 using DolbyIOClient client = new DolbyIOClient();
 
@@ -152,7 +67,7 @@ CreateSubscribeToken create = new CreateSubscribeToken
         }
     }
 };
-SubscribeToken token = await client.Streaming.SubscribeToken.CreateAsync("api_secret", create);
+SubscribeToken token = await client.Streaming.SubscribeToken.CreateAsync(API_SECRET, create);
 ```
 
 ## Media Examples
@@ -164,7 +79,7 @@ To start an enhance job, use the following code:
 ```csharp
 using System;
 using DolbyIO.Rest;
-using DolbyIO.Rest.Models;
+using DolbyIO.Rest.Media.Models;
 using Newtonsoft.Json;
 
 const string APP_KEY = "app_key";
@@ -172,7 +87,7 @@ const string APP_SECRET = "app_secret";
 
 using DolbyIOClient client = new DolbyIOClient();
 
-JwtToken jwt = await client.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
+JwtToken jwt = await client.Media.Authentication.GetApiAccessTokenAsync(APP_KEY, APP_SECRET);
 
 string jobDescription = JsonConvert.SerializeObject(new {
     content = new { type = "podcast" },

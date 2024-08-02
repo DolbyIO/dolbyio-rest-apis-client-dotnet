@@ -10,6 +10,8 @@ public sealed class Mapi
 
     public AnalyzeSpeech AnalyzeSpeech { get; }
 
+    public Authentication Authentication { get; }
+
     public Diagnose Diagnose { get; }
 
     public Enhance Enhance { get; }
@@ -29,6 +31,7 @@ public sealed class Mapi
         Analyze = new Analyze(httpClient);
         AnalyzeMusic = new AnalyzeMusic(httpClient);
         AnalyzeSpeech = new AnalyzeSpeech(httpClient);
+        Authentication = new Authentication(httpClient);
         Diagnose = new Diagnose(httpClient);
         Enhance = new Enhance(httpClient);
         Io = new Io(httpClient);

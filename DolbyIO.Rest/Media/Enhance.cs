@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 using Newtonsoft.Json;
 
 namespace DolbyIO.Rest.Media;
