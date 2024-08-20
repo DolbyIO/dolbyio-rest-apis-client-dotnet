@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 
 namespace DolbyIO.Rest.Media;
 
@@ -31,7 +30,7 @@ public sealed class Io
     public async Task<string> GetUploadUrlAsync(JwtToken accessToken, string dlbUrl)
     {
         var body = new { url = dlbUrl };
-        const string requestUrl = Urls.CAPI_BASE_URL + "/media/input";
+        const string requestUrl = Urls.MAPI_BASE_URL + "/media/input";
         GetUploadUrlResponse result = await _httpClient.SendPostAsync<dynamic, GetUploadUrlResponse>(requestUrl, accessToken, body);
         return result.Url;
     }
@@ -48,7 +47,7 @@ public sealed class Io
     public async Task<string> GetDownloadUrlAsync(JwtToken accessToken, string dlbUrl)
     {
         var body = new { url = dlbUrl };
-        const string requestUrl = Urls.CAPI_BASE_URL + "/media/output";
+        const string requestUrl = Urls.MAPI_BASE_URL + "/media/output";
         GetDownloadUrlResponse result = await _httpClient.SendPostAsync<dynamic, GetDownloadUrlResponse>(requestUrl, accessToken, body);
         return result.Url;
     }

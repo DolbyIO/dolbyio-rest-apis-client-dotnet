@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using DolbyIO.Rest.Models;
+using DolbyIO.Rest.Media.Models;
 using Newtonsoft.Json;
 
 namespace DolbyIO.Rest;

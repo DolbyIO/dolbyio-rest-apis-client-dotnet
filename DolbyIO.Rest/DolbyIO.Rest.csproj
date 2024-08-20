@@ -6,8 +6,8 @@
     <Authors>Fabien Lavocat</Authors>
     <Company>Dolby.io</Company>
     <Title>Dolby.io REST APIs Client for .NET</Title>
-    <Description>.NET wrapper for the dolby.io REST Communications and Media APIs.</Description>
-    <Summary>.NET wrapper for the dolby.io REST Communications and Media APIs.</Summary>
+    <Description>.NET wrapper for the Dolby Millicast and Media APIs.</Description>
+    <Summary>.NET wrapper for the Dolby Millicast and Media APIs.</Summary>
     <PackageId>DolbyIO.Rest</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>

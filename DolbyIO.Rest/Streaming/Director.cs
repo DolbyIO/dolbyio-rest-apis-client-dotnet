@@ -22,7 +22,7 @@ public sealed class Director
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="PublishResponse" /> object.</returns>
     public async Task<PublishResponse> PublishAsync(string publishingToken, string streamName)
     {
-        const string url = Urls.SAPI_DIRECTOR_BASE_URL + "/api/director/publish";
+        const string url = Urls.STREAMING_DIRECTOR_BASE_URL + "/api/director/publish";
 
         var body = new
         {
@@ -43,7 +43,7 @@ public sealed class Director
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="SubscribeResponse" /> object.</returns>
     public async Task<SubscribeResponse> SubscribeAsync(string streamName, string streamAccountId = null, string subscribeToken = null)
     {
-        const string url = Urls.SAPI_DIRECTOR_BASE_URL + "/api/director/subscribe";
+        const string url = Urls.STREAMING_DIRECTOR_BASE_URL + "/api/director/subscribe";
 
         var body = new
         {

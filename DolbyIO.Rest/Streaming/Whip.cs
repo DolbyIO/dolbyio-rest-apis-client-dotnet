@@ -25,7 +25,7 @@ public sealed class Whip
     /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the SDP answer.</returns>
     public async Task<string> WhipAsync(string publishingToken, string streamName, string codec, string sourceId, string sdpOffer)
     {
-        var uriBuilder = new UriBuilder(Urls.SAPI_DIRECTOR_BASE_URL)
+        var uriBuilder = new UriBuilder(Urls.STREAMING_DIRECTOR_BASE_URL)
         {
             Path = $"/api/whip/{streamName}"
         };

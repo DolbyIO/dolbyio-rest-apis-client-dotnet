@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 
 namespace DolbyIO.Rest.Media;
 
@@ -22,10 +21,6 @@ public sealed class Analyze
     /// See: <seealso cref="https://docs.dolby.io/media-apis/reference/media-analyze-post"/>
     /// </summary>
     /// <remarks>
-    /// Beta API<br/>
-    /// This API is being made available as an early preview.
-    /// If you have feedback on how you'd like to use the API please reach out to share your feedback with our team.
-    /// <seealso cref="https://dolby.io/contact"/><br/>
     /// Content Length - Media content with duration less than 2 seconds will not be processed.The API will return an ERROR in this case.
     /// </remarks>
     /// <param name="accessToken">Access token to use for authentication.</param>

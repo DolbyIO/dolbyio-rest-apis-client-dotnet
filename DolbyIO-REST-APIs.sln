@@ -5,8 +5,6 @@ VisualStudioVersion = 25.0.1703.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolbyIO.Rest", "DolbyIO.Rest\DolbyIO.Rest.csproj", "{6EA9D0CC-8A04-4AF4-8E24-598377802881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DolbyIO.Rest.Tests", "DolbyIO.Rest.Tests\DolbyIO.Rest.Tests.csproj", "{1A6EEC23-1691-42CB-B3B6-FFCF0DEA8C31}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{6EA9D0CC-8A04-4AF4-8E24-598377802881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EA9D0CC-8A04-4AF4-8E24-598377802881}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EA9D0CC-8A04-4AF4-8E24-598377802881}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A6EEC23-1691-42CB-B3B6-FFCF0DEA8C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A6EEC23-1691-42CB-B3B6-FFCF0DEA8C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A6EEC23-1691-42CB-B3B6-FFCF0DEA8C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A6EEC23-1691-42CB-B3B6-FFCF0DEA8C31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

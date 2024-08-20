@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using DolbyIO.Rest.Media.Models;
-using DolbyIO.Rest.Models;
 
 namespace DolbyIO.Rest.Media;
 
@@ -20,12 +19,6 @@ public sealed class Diagnose
     /// This is an asynchronous operation so you will receive a job identifier to be used to get the job status and result.<br/>
     /// See: <seealso cref="https://docs.dolby.io/media-apis/reference/media-diagnose-post"/>
     /// </summary>
-    /// <remarks>
-    /// Beta API<br/>
-    /// This API is being made available as an early preview.
-    /// If you have feedback on how you'd like to use the API please reach out to share your feedback with our team.
-    /// <seealso cref="https://dolby.io/contact"/><br/>
-    /// </remarks>
     /// <param name="accessToken">Access token to use for authentication.</param>
     /// <param name="jobDescription">Content of the job description as a JSON payload.
     /// You can find the definition at this URL: <seealso cref="https://docs.dolby.io/media-apis/reference/media-diagnose-post"/></param>

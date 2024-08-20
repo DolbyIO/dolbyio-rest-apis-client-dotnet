@@ -4,6 +4,12 @@ using Newtonsoft.Json;
 
 namespace DolbyIO.Rest.Streaming.Models;
 
+public sealed class SubscribeTokenTracking
+{
+    [JsonProperty("trackingId")]
+    public string TrackingId { get; set; }
+}
+
 public sealed class SubscribeTokenStream
 {
     [JsonProperty("streamName")]
@@ -53,6 +59,9 @@ public sealed class SubscribeToken
 
     [JsonProperty("originCluster")]
     public string OriginCluster { get; internal set; }
+
+    [JsonProperty("tracking")]
+    public SubscribeTokenTracking Tracking { get; internal set; }
 }
 
 public sealed class UpdateSubscribeToken
@@ -119,4 +128,7 @@ public sealed class CreateSubscribeToken
 
     [JsonProperty("originCluster", NullValueHandling = NullValueHandling.Ignore)]
     public string OriginCluster { get; set; }
+
+    [JsonProperty("tracking", NullValueHandling = NullValueHandling.Ignore)]
+    public SubscribeTokenTracking Tracking { get; set; }
 }

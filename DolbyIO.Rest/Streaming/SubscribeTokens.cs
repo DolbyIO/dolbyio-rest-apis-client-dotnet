@@ -10,7 +10,7 @@ namespace DolbyIO.Rest.Streaming;
 
 public sealed class SubscribeTokens
 {
-    private const string URL_BASE = Urls.SAPI_BASE_URL + "/api/subscribe_token";
+    private const string URL_BASE = Urls.STREAMING_BASE_URL + "/api/subscribe_token";
 
     private readonly HttpClient _httpClient;
 
@@ -50,7 +50,7 @@ public sealed class SubscribeTokens
 
     public async Task<IEnumerable<SubscribeToken>> ListAsync(string apiSecret, int page, int itemsOnPage, ListSortBy sortBy = ListSortBy.None, bool isDescending = false)
     {
-        var uriBuilder = new UriBuilder(Urls.SAPI_BASE_URL);
+        var uriBuilder = new UriBuilder(Urls.STREAMING_BASE_URL);
         uriBuilder.Path = "/api/subscribe_token/list";
 
         var nvc = new NameValueCollection();
